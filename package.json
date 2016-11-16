@@ -1,0 +1,25 @@
+{
+  "name": "uuids",
+  "version": "0.0.0",
+  "description": "Generate multiple UUIDs for testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j-/uuids.git"
+  },
+  "keywords": [
+    "uuid",
+    "guid",
+    "unique",
+    "v4"
+  ],
+  "author": "Jamie Hoeks <j@skeoh.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/j-/uuids/issues"
+  },
+  "homepage": "https://github.com/j-/uuids#readme"
+}
