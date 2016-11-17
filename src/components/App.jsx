@@ -11,6 +11,9 @@ import {
 	Glyph,
 } from 'elemental';
 
+const MIN_COUNT = 1;
+const MAX_COUNT = 1000;
+
 const ReloadIcon = () => <Glyph icon="sync" />;
 const CopyIcon = () => <Glyph icon="clippy" />;
 
@@ -23,6 +26,10 @@ const generateUUIDs = (length, version = 'v4') => {
 	}
 	return result;
 };
+
+const clamp = (val, min, max) => (
+	Math.max(min, Math.min(max, val))
+);
 
 export default class App extends Component {
 	constructor (props) {
@@ -54,7 +61,7 @@ export default class App extends Component {
 
 	handleChangeCount (e) {
 		this.setState({
-			count: Number(e.target.value),
+			count: clamp(Number(e.target.value), MIN_COUNT, MAX_COUNT),
 		}, () => this.regenerateUUIDs());
 	}
 
@@ -68,8 +75,6 @@ export default class App extends Component {
 						<FormInput
 							type="number"
 							placeholder="Count"
-							min={ 1 }
-							max={ 1000 }
 							onChange={ this.handleChangeCount }
 							value={ count }
 						/>
