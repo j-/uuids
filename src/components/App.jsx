@@ -4,6 +4,8 @@ import uuid from 'uuid';
 
 import {
 	Button,
+	Form,
+	FormField,
 	FormInput,
 } from 'elemental';
 
@@ -25,8 +27,8 @@ export default class App extends Component {
 			version: 'v4',
 		}
 		this.state.uuids = this.generateUUIDs();
-		this.regenerateUUIDs = this.regenerateUUIDs.bind(this);
-		this.changeCount = this.changeCount.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleChangeCount = this.handleChangeCount.bind(this);
 	}
 
 	generateUUIDs () {
@@ -40,7 +42,12 @@ export default class App extends Component {
 		});
 	}
 
-	changeCount (e) {
+	handleSubmit (e) {
+		e.preventDefault();
+		this.regenerateUUIDs();
+	}
+
+	handleChangeCount (e) {
 		this.setState({
 			count: Number(e.target.value),
 		}, () => this.regenerateUUIDs());
@@ -51,13 +58,20 @@ export default class App extends Component {
 		return (
 			<div className="app">
 				<h1>UUIDs</h1>
-				<FormInput
-					type="number"
-					min={ 1 }
-					onChange={ this.changeCount }
-					value={ count }
-				/>
-				<Button onClick={ this.regenerateUUIDs }>Generate more</Button>
+				<Form type="inline" onSubmit={ this.handleSubmit }>
+					<FormField label="Count">
+						<FormInput
+							type="number"
+							placeholder="Count"
+							min={ 1 }
+							onChange={ this.handleChangeCount }
+							value={ count }
+						/>
+					</FormField>
+					<FormField>
+						<Button submit>Generate more</Button>
+					</FormField>
+				</Form>
 				<UUIDList
 					uuids={ uuids }
 				/>
