@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UUIDList from './UUIDList';
 import uuid from 'uuid';
+import { Button } from 'elemental';
 
 const generateUUIDs = (length, version = 'v4') => {
 	const result = [];
@@ -20,6 +21,7 @@ export default class App extends Component {
 			version: 'v4',
 		}
 		this.state.uuids = this.generateUUIDs();
+		this.regenerateUUIDs = this.regenerateUUIDs.bind(this);
 	}
 
 	generateUUIDs () {
@@ -27,11 +29,18 @@ export default class App extends Component {
 		return generateUUIDs(count, version);
 	}
 
+	regenerateUUIDs () {
+		this.setState({
+			uuids: this.generateUUIDs(),
+		});
+	}
+
 	render () {
 		const { uuids } = this.state;
 		return (
 			<div className="app">
 				<h1>UUIDs</h1>
+				<Button onClick={ this.regenerateUUIDs }>Generate more</Button>
 				<UUIDList
 					uuids={ uuids }
 				/>
