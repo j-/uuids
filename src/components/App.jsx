@@ -7,7 +7,10 @@ import {
 	Form,
 	FormField,
 	FormInput,
+	Glyph,
 } from 'elemental';
+
+const ReloadIcon = () => <Glyph icon="sync" />;
 
 const generateUUIDs = (length, version = 'v4') => {
 	const result = [];
@@ -69,7 +72,11 @@ export default class App extends Component {
 						/>
 					</FormField>
 					<FormField>
-						<Button submit>Generate more</Button>
+						<Button submit>
+							<ReloadIcon />
+							{ ' ' }
+							Generate more
+						</Button>
 					</FormField>
 				</Form>
 				<UUIDList
