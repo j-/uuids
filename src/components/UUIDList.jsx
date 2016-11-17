@@ -6,8 +6,9 @@ const UUIDList = ({ uuids, delimiter, ...props }) => (
 		<FormInput
 			style={{ height: 250 }}
 			multiline
+			readOnly
 			spellCheck={ false }
-			defaultValue={ uuids.join(delimiter) }
+			value={ uuids.join(delimiter) }
 		/>
 	</div>
 );
