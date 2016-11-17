@@ -67,6 +67,7 @@ export default class App extends Component {
 							type="number"
 							placeholder="Count"
 							min={ 1 }
+							max={ 1000 }
 							onChange={ this.handleChangeCount }
 							value={ count }
 						/>
