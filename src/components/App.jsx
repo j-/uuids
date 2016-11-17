@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UUIDList from './UUIDList';
 import uuid from 'uuid';
 import CopyRandom from './CopyRandom';
+import Ribbon from './Ribbon';
 
 import {
 	Button,
@@ -74,6 +75,7 @@ export default class App extends Component {
 		return (
 			<div className="app">
 				<h1>UUIDs</h1>
+				<Ribbon />
 				<Form type="inline" onSubmit={ this.handleSubmit }>
 					<FormField label="Count">
 						<FormInput
