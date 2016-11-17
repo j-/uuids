@@ -38,6 +38,7 @@
     "less-loader": "^2.2.3",
     "react": "^15.4.0",
     "react-addons-css-transition-group": "^15.4.0",
+    "react-copy-to-clipboard": "^4.2.3",
     "react-dom": "^15.4.0",
     "style-loader": "^0.13.1",
     "uuid": "^2.0.3",

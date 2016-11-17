@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UUIDList from './UUIDList';
 import uuid from 'uuid';
+import CopyRandom from './CopyRandom';
 
 import {
 	Button,
@@ -11,6 +12,7 @@ import {
 } from 'elemental';
 
 const ReloadIcon = () => <Glyph icon="sync" />;
+const CopyIcon = () => <Glyph icon="clippy" />;
 
 const generateUUIDs = (length, version = 'v4') => {
 	const result = [];
@@ -83,6 +85,14 @@ export default class App extends Component {
 				<UUIDList
 					uuids={ uuids }
 				/>
+				<hr />
+				<div>
+					<CopyRandom>
+						<CopyIcon />
+						{ ' ' }
+						Copy random
+					</CopyRandom>
+				</div>
 			</div>
 		);
 	}
