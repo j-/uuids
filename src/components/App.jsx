@@ -60,9 +60,13 @@ export default class App extends Component {
 	}
 
 	handleChangeCount (e) {
-		this.setState({
-			count: clamp(Number(e.target.value), MIN_COUNT, MAX_COUNT),
-		}, () => this.regenerateUUIDs());
+		const previousCount = this.state.count;
+		const newCount = clamp(Number(e.target.value), MIN_COUNT, MAX_COUNT);
+		if (newCount !== previousCount) {
+			this.setState({
+				count: newCount,
+			}, () => this.regenerateUUIDs());
+		}
 	}
 
 	render () {
