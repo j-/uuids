@@ -18,16 +18,22 @@ export default class App extends Component {
 		this.state = {
 			count: 10,
 			version: 'v4',
-		};
+		}
+		this.state.uuids = this.generateUUIDs();
+	}
+
+	generateUUIDs () {
+		const { count, version } = this.state;
+		return generateUUIDs(count, version);
 	}
 
 	render () {
-		const { count, version } = this.state;
+		const { uuids } = this.state;
 		return (
 			<div className="app">
 				<h1>UUIDs</h1>
 				<UUIDList
-					uuids={ generateUUIDs(count, version) }
+					uuids={ uuids }
 				/>
 			</div>
 		);
