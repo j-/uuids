@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
+import { generateUUIDs, VERSION_4 as UUID_V4 } from '../uuid';
 
 import {
 	Glyph,
@@ -19,16 +19,6 @@ const formatOptions = [
 	{ label: 'CSV', value: TYPE_CSV },
 ];
 
-const generateUUIDs = (length, version = 'v4') => {
-	const result = [];
-	for (let i = 0; i < length; i++) {
-		result.push(
-			uuid[version]()
-		);
-	}
-	return result;
-};
-
 const DownloadIcon = () => <Glyph icon="desktop-download" />;
 
 class Download extends Component {
@@ -36,7 +26,7 @@ class Download extends Component {
 		super(props);
 		this.state = {
 			count: 1000,
-			version: 'v4',
+			version: UUID_V4,
 			format: TYPE_JSON,
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);

@@ -1,7 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { Button } from 'elemental';
-import uuid from 'uuid';
+
+import {
+	generateUUID,
+	VERSION_1 as UUID_V1,
+	VERSION_4 as UUID_V4,
+} from '../uuid';
 
 export default class CopyRandom extends Component {
 	constructor (props) {
@@ -14,7 +19,7 @@ export default class CopyRandom extends Component {
 
 	generateUUID () {
 		const { version } = this.props;
-		return uuid[version]();
+		return generateUUID(version);
 	}
 
 	handleCopy () {
@@ -35,9 +40,9 @@ export default class CopyRandom extends Component {
 }
 
 CopyRandom.propTypes = {
-	version: PropTypes.oneOf(['v1', 'v4']),
+	version: PropTypes.oneOf([UUID_V1, UUID_V4]),
 };
 
 CopyRandom.defaultProps = {
-	version: 'v4',
+	version: UUID_V4,
 };

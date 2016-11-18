@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import UUIDList from './UUIDList';
-import uuid from 'uuid';
+import { generateUUIDs, VERSION_4 as UUID_V4 } from '../uuid';
 import CopyRandom from './CopyRandom';
 import Ribbon from './Ribbon';
 import Configuration from './Configuration';
@@ -17,16 +17,6 @@ const MAX_COUNT = 1000;
 const ReloadIcon = () => <Glyph icon="sync" />;
 const CopyIcon = () => <Glyph icon="clippy" />;
 
-const generateUUIDs = (length, version = 'v4') => {
-	const result = [];
-	for (let i = 0; i < length; i++) {
-		result.push(
-			uuid[version]()
-		);
-	}
-	return result;
-};
-
 const clamp = (val, min, max) => (
 	Math.max(min, Math.min(max, val))
 );
@@ -36,7 +26,7 @@ export default class App extends Component {
 		super(props);
 		this.state = {
 			count: 10,
-			version: 'v4',
+			version: UUID_V4,
 			delimiter: '\n',
 		}
 		this.state.uuids = this.generateUUIDs();
