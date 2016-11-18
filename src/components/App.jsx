@@ -83,6 +83,7 @@ export default class App extends Component {
 			<div className="app">
 				<h1>UUIDs</h1>
 				<Ribbon />
+				<h2>Generate v4 UUIDs</h2>
 				<UUIDList
 					uuids={ uuids }
 					delimiter={ delimiter }
@@ -108,6 +109,7 @@ export default class App extends Component {
 					</CopyRandom>
 				</div>
 				<hr />
+				<h2>Download v4 UUIDs</h2>
 				<Download />
 			</div>
 		);
