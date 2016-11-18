@@ -5,6 +5,7 @@ import CopyRandom from './CopyRandom';
 import Ribbon from './Ribbon';
 import Configuration from './Configuration';
 import Download from './Download';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 import {
 	Button,
@@ -69,6 +70,7 @@ export default class App extends Component {
 
 	render () {
 		const { count, uuids, delimiter } = this.state;
+		const text = uuids.join(delimiter);
 		return (
 			<div className="app">
 				<h1>UUIDs</h1>
@@ -92,10 +94,18 @@ export default class App extends Component {
 						Generate more
 					</Button>
 					{ ' ' }
+					<CopyToClipboard text={ text }>
+						<Button>
+							<CopyIcon />
+							{ ' ' }
+							Copy above UUIDs
+						</Button>
+					</CopyToClipboard>
+					{ ' ' }
 					<CopyRandom>
 						<CopyIcon />
 						{ ' ' }
-						Copy random
+						Copy random UUID
 					</CopyRandom>
 				</div>
 				<hr />
