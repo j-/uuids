@@ -7,6 +7,7 @@ import Ribbon from './Ribbon';
 import {
 	Button,
 	Form,
+	FormRow,
 	FormField,
 	FormInput,
 	FormSelect,
@@ -48,6 +49,7 @@ export default class App extends Component {
 			delimiter: '\n',
 		}
 		this.state.uuids = this.generateUUIDs();
+		this.regenerateUUIDs = this.regenerateUUIDs.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChangeCount = this.handleChangeCount.bind(this);
 		this.handleChangeDelimiter = this.handleChangeDelimiter.bind(this);
@@ -66,7 +68,6 @@ export default class App extends Component {
 
 	handleSubmit (e) {
 		e.preventDefault();
-		this.regenerateUUIDs();
 	}
 
 	handleChangeCount (e) {
@@ -91,37 +92,38 @@ export default class App extends Component {
 			<div className="app">
 				<h1>UUIDs</h1>
 				<Ribbon />
-				<Form type="inline" onSubmit={ this.handleSubmit }>
-					<FormField label="Count">
-						<FormInput
-							type="number"
-							placeholder="Count"
-							onChange={ this.handleChangeCount }
-							value={ count }
-						/>
-					</FormField>
-					<FormField label="Delimiter">
-						<FormSelect
-							type="number"
-							options={ delimiterOptions }
-							onChange={ this.handleChangeDelimiter }
-							value={ delimiter }
-						/>
-					</FormField>
-					<FormField>
-						<Button submit>
-							<ReloadIcon />
-							{ ' ' }
-							Generate more
-						</Button>
-					</FormField>
-				</Form>
 				<UUIDList
 					uuids={ uuids }
 					delimiter={ delimiter }
 				/>
 				<hr />
+				<Form onSubmit={ this.handleSubmit }>
+					<FormRow>
+						<FormField width="one-half" label="Count">
+							<FormInput
+								type="number"
+								placeholder="Count"
+								onChange={ this.handleChangeCount }
+								value={ count }
+							/>
+						</FormField>
+						<FormField width="one-half" label="Delimiter">
+							<FormSelect
+								type="number"
+								options={ delimiterOptions }
+								onChange={ this.handleChangeDelimiter }
+								value={ delimiter }
+							/>
+						</FormField>
+					</FormRow>
+				</Form>
 				<div>
+					<Button type="primary" onClick={ this.regenerateUUIDs }>
+						<ReloadIcon />
+						{ ' ' }
+						Generate more
+					</Button>
+					{ ' ' }
 					<CopyRandom>
 						<CopyIcon />
 						{ ' ' }
