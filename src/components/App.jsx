@@ -9,6 +9,7 @@ import {
 	Form,
 	FormField,
 	FormInput,
+	FormSelect,
 	Glyph,
 } from 'elemental';
 
@@ -32,16 +33,24 @@ const clamp = (val, min, max) => (
 	Math.max(min, Math.min(max, val))
 );
 
+const delimiterOptions = [
+	{ label: 'Line break', value: '\n' },
+	{ label: 'Tab', value: '\t' },
+	{ label: 'Comma', value: ',' },
+];
+
 export default class App extends Component {
 	constructor (props) {
 		super(props);
 		this.state = {
 			count: 10,
 			version: 'v4',
+			delimiter: '\n',
 		}
 		this.state.uuids = this.generateUUIDs();
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChangeCount = this.handleChangeCount.bind(this);
+		this.handleChangeDelimiter = this.handleChangeDelimiter.bind(this);
 	}
 
 	generateUUIDs () {
@@ -70,8 +79,14 @@ export default class App extends Component {
 		}
 	}
 
+	handleChangeDelimiter (value) {
+		this.setState({
+			delimiter: value,
+		});
+	}
+
 	render () {
-		const { count, uuids } = this.state;
+		const { count, uuids, delimiter } = this.state;
 		return (
 			<div className="app">
 				<h1>UUIDs</h1>
@@ -85,6 +100,14 @@ export default class App extends Component {
 							value={ count }
 						/>
 					</FormField>
+					<FormField label="Delimiter">
+						<FormSelect
+							type="number"
+							options={ delimiterOptions }
+							onChange={ this.handleChangeDelimiter }
+							value={ delimiter }
+						/>
+					</FormField>
 					<FormField>
 						<Button submit>
 							<ReloadIcon />
@@ -95,6 +118,7 @@ export default class App extends Component {
 				</Form>
 				<UUIDList
 					uuids={ uuids }
+					delimiter={ delimiter }
 				/>
 				<hr />
 				<div>
