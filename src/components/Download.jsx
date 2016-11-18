@@ -73,8 +73,9 @@ class Download extends Component {
 		const json = JSON.stringify(data, null, '  ');
 		this.downloadData(
 			json,
+			data.length,
 			'application/json',
-			'uuids.json'
+			'.json'
 		);
 	}
 
@@ -82,18 +83,20 @@ class Download extends Component {
 		const csv = 'UUID\n' + data.join('\n');
 		this.downloadData(
 			csv,
+			data.length,
 			'text/csv',
-			'uuids.csv'
+			'.csv'
 		);
 	}
 
 	// From http://jsfiddle.net/koldev/cW7W5/
-	downloadData (data, type, filename) {
-		const blob = new Blob([data], { type });
+	downloadData (raw, count, type, extension) {
+		const timestamp = Date.now();
+		const blob = new Blob([raw], { type });
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement('a');
 		a.href = url;
-		a.download = filename;
+		a.download = `uuids-${count}-${timestamp}.${extension}`;
 		a.click();
 		URL.revokeObjectURL(url);
 	}
