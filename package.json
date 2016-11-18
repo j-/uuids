@@ -1,6 +1,6 @@
 {
   "name": "uuids",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Generate multiple UUIDs for testing",
   "main": "index.js",
   "scripts": {
