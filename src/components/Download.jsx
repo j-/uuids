@@ -38,6 +38,8 @@ class Download extends Component {
 			format: TYPE_JSON,
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleChangeCount = this.handleChangeCount.bind(this);
+		this.handleChangeFormat = this.handleChangeFormat.bind(this);
 	}
 
 	handleSubmit (e) {
