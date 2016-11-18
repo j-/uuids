@@ -12,9 +12,11 @@ import {
 } from 'elemental';
 
 const TYPE_JSON = 'json';
+const TYPE_CSV = 'csv';
 
 const formatOptions = [
 	{ label: 'JSON', value: TYPE_JSON },
+	{ label: 'CSV', value: TYPE_CSV },
 ];
 
 const generateUUIDs = (length, version = 'v4') => {
@@ -70,6 +72,8 @@ class Download extends Component {
 		switch (format) {
 			case TYPE_JSON:
 				return this.downloadJSON(data);
+			case TYPE_CSV:
+				return this.downloadCSV(data);
 			default:
 				return null;
 		}
@@ -81,6 +85,15 @@ class Download extends Component {
 			json,
 			'application/json',
 			'uuids.json'
+		);
+	}
+
+	downloadCSV (data) {
+		const csv = 'UUID\n' + data.join('\n');
+		this.downloadData(
+			csv,
+			'text/csv',
+			'uuids.csv'
 		);
 	}
 
