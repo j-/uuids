@@ -4,6 +4,7 @@ import uuid from 'uuid';
 import CopyRandom from './CopyRandom';
 import Ribbon from './Ribbon';
 import Configuration from './Configuration';
+import Download from './Download';
 
 import {
 	Button,
@@ -86,7 +87,7 @@ export default class App extends Component {
 					uuids={ uuids }
 					delimiter={ delimiter }
 				/>
-				<hr />
+				<br />
 				<Configuration
 					count={ count }
 					delimiter={ delimiter }
@@ -106,6 +107,8 @@ export default class App extends Component {
 						Copy random
 					</CopyRandom>
 				</div>
+				<hr />
+				<Download />
 			</div>
 		);
 	}
