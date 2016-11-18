@@ -3,14 +3,10 @@ import UUIDList from './UUIDList';
 import uuid from 'uuid';
 import CopyRandom from './CopyRandom';
 import Ribbon from './Ribbon';
+import Configuration from './Configuration';
 
 import {
 	Button,
-	Form,
-	FormRow,
-	FormField,
-	FormInput,
-	FormSelect,
 	Glyph,
 } from 'elemental';
 
@@ -33,12 +29,6 @@ const generateUUIDs = (length, version = 'v4') => {
 const clamp = (val, min, max) => (
 	Math.max(min, Math.min(max, val))
 );
-
-const delimiterOptions = [
-	{ label: 'Line break', value: '\n' },
-	{ label: 'Tab', value: '\t' },
-	{ label: 'Comma', value: ',' },
-];
 
 export default class App extends Component {
 	constructor (props) {
@@ -97,26 +87,12 @@ export default class App extends Component {
 					delimiter={ delimiter }
 				/>
 				<hr />
-				<Form onSubmit={ this.handleSubmit }>
-					<FormRow>
-						<FormField width="one-half" label="Count">
-							<FormInput
-								type="number"
-								placeholder="Count"
-								onChange={ this.handleChangeCount }
-								value={ count }
-							/>
-						</FormField>
-						<FormField width="one-half" label="Delimiter">
-							<FormSelect
-								type="number"
-								options={ delimiterOptions }
-								onChange={ this.handleChangeDelimiter }
-								value={ delimiter }
-							/>
-						</FormField>
-					</FormRow>
-				</Form>
+				<Configuration
+					count={ count }
+					delimiter={ delimiter }
+					onChangeCount={ this.handleChangeCount }
+					onChangeDelimiter={ this.handleChangeDelimiter }
+				/>
 				<div>
 					<Button type="primary" onClick={ this.regenerateUUIDs }>
 						<ReloadIcon />
