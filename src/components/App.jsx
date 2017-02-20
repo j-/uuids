@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import UUIDSingle from './UUIDSingle';
 import UUIDList from './UUIDList';
 import { generateUUIDs, VERSION_4 as UUID_V4 } from '../uuid';
 import CopyRandom from './CopyRandom';
@@ -75,6 +76,9 @@ export default class App extends Component {
 			<div className="app">
 				<h1>UUIDs</h1>
 				<Ribbon />
+				<h2>Random v4 UUID</h2>
+				<UUIDSingle />
+				<hr />
 				<h2>Generate v4 UUIDs</h2>
 				<UUIDList
 					uuids={ uuids }
