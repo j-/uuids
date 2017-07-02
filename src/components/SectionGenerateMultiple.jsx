@@ -6,6 +6,7 @@ import BlockButton from './BlockButton';
 
 import {
 	Glyph,
+	Form,
 	FormField,
 	FormInput,
 	FormSelect,
@@ -39,23 +40,32 @@ export default class SectionGenerateMultiple extends React.Component {
 			count: DEFAULT_COUNT,
 			delimiter: DEFAULT_DELIMITER,
 			uuids: generateUUIDs(DEFAULT_COUNT),
+			hasFocus: false,
 		};
 		this.inputComponent = null;
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleFocus = this.handleFocus.bind(this);
+		this.handleBlur = this.handleBlur.bind(this);
 		this.regenerateUUIDs = this.regenerateUUIDs.bind(this);
 		this.handleChangeCount = this.handleChangeCount.bind(this);
 		this.handleChangeDelimiter = this.handleChangeDelimiter.bind(this);
 	}
 
 	render () {
-		const { count, delimiter, uuids } = this.state;
+		const { count, delimiter, uuids, hasFocus } = this.state;
 		const text = uuids.join(delimiter);
 		const textareaStyle = {
 			whiteSpace: delimiter === '\n' ? 'pre' : 'pre-wrap',
 			fontFamily: 'monospace',
 			height: 250,
 		};
+		const buttonType = hasFocus ? 'primary' : 'default-primary';
 		return (
-			<div>
+			<Form
+				onSubmit={ this.handleSubmit }
+				onFocus={ this.handleFocus }
+				onBlur={ this.handleBlur }
+			>
 				<FormField>
 					<FormInput
 						style={ textareaStyle }
@@ -89,7 +99,7 @@ export default class SectionGenerateMultiple extends React.Component {
 				<br />
 				<Row>
 					<Col sm="1/2">
-						<BlockButton type="default-primary" onClick={ this.regenerateUUIDs }>
+						<BlockButton type={ buttonType } onClick={ this.regenerateUUIDs }>
 							<ReloadIcon />&nbsp;
 							Generate more
 						</BlockButton>
@@ -101,8 +111,25 @@ export default class SectionGenerateMultiple extends React.Component {
 						</BlockButton>
 					</Col>
 				</Row>
-			</div>
+			</Form>
 		);
+	}
+
+	handleSubmit (e) {
+		e.preventDefault();
+		this.regenerateUUIDs();
+	}
+
+	handleFocus () {
+		this.setState(() => ({
+			hasFocus: true,
+		}));
+	}
+
+	handleBlur () {
+		this.setState(() => ({
+			hasFocus: false,
+		}));
 	}
 
 	regenerateUUIDs () {

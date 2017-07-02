@@ -6,6 +6,7 @@ import BlockButton from './BlockButton';
 
 import {
 	Glyph,
+	Form,
 	FormField,
 	FormInput,
 	Button,
@@ -21,8 +22,12 @@ export default class SectionGenerateSingle extends React.Component {
 		super(props);
 		this.state = {
 			uuid: generateUUID(),
+			hasFocus: false,
 		};
 		this.inputComponent = null;
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleFocus = this.handleFocus.bind(this);
+		this.handleBlur = this.handleBlur.bind(this);
 		this.regenerateUUID = this.regenerateUUID.bind(this);
 		this.selectUUID = this.selectUUID.bind(this);
 	}
@@ -32,9 +37,14 @@ export default class SectionGenerateSingle extends React.Component {
 	}
 
 	render () {
-		const { uuid } = this.state;
+		const { uuid, hasFocus } = this.state;
+		const buttonType = hasFocus ? 'primary' : 'default-primary';
 		return (
-			<div>
+			<Form
+				onSubmit={ this.handleSubmit }
+				onFocus={ this.handleFocus }
+				onBlur={ this.handleBlur }
+			>
 				<FormField>
 					<FormInput
 						style={{ fontFamily: 'monospace' }}
@@ -48,7 +58,7 @@ export default class SectionGenerateSingle extends React.Component {
 				<br />
 				<Row>
 					<Col sm="1/2">
-						<BlockButton type="default-primary" onClick={ this.regenerateUUID }>
+						<BlockButton type={ buttonType } onClick={ this.regenerateUUID }>
 							<ReloadIcon />&nbsp;
 							Generate another
 						</BlockButton>
@@ -60,8 +70,25 @@ export default class SectionGenerateSingle extends React.Component {
 						</BlockButton>
 					</Col>
 				</Row>
-			</div>
+			</Form>
 		);
+	}
+
+	handleSubmit (e) {
+		e.preventDefault();
+		this.regenerateUUID();
+	}
+
+	handleFocus () {
+		this.setState(() => ({
+			hasFocus: true,
+		}));
+	}
+
+	handleBlur () {
+		this.setState(() => ({
+			hasFocus: false,
+		}));
 	}
 
 	regenerateUUID () {

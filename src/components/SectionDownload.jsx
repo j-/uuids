@@ -29,16 +29,24 @@ export default class SectionDownload extends React.Component {
 			count: 1000,
 			version: UUID_V4,
 			format: TYPE_JSON,
+			hasFocus: false,
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleFocus = this.handleFocus.bind(this);
+		this.handleBlur = this.handleBlur.bind(this);
 		this.handleChangeCount = this.handleChangeCount.bind(this);
 		this.handleChangeFormat = this.handleChangeFormat.bind(this);
 	}
 
 	render () {
-		const { count, format } = this.state;
+		const { count, format, hasFocus } = this.state;
+		const buttonType = hasFocus ? 'primary' : 'default-primary';
 		return (
-			<Form onSubmit={ this.handleSubmit }>
+			<Form
+				onSubmit={ this.handleSubmit }
+				onFocus={ this.handleFocus }
+				onBlur={ this.handleBlur }
+			>
 				<Row>
 					<Col sm="1/2">
 						<FormField label="Count">
@@ -62,7 +70,7 @@ export default class SectionDownload extends React.Component {
 				</Row>
 				<br />
 				<div>
-					<BlockButton type="default-primary" submit={ true }>
+					<BlockButton type={ buttonType } submit={ true }>
 						<DownloadIcon />&nbsp;
 						Download
 					</BlockButton>
@@ -74,6 +82,18 @@ export default class SectionDownload extends React.Component {
 	handleSubmit (e) {
 		e.preventDefault();
 		this.downloadFile();
+	}
+
+	handleFocus () {
+		this.setState(() => ({
+			hasFocus: true,
+		}));
+	}
+
+	handleBlur () {
+		this.setState(() => ({
+			hasFocus: false,
+		}));
 	}
 
 	handleChangeCount (e) {
