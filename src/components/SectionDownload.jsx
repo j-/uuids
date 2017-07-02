@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { generateUUIDs, VERSION_4 as UUID_V4 } from '../uuid';
 
 import {
 	Glyph,
 	Form,
-	FormRow,
+	Row,
+	Col,
 	FormField,
 	FormInput,
 	FormSelect,
@@ -21,7 +22,7 @@ const formatOptions = [
 
 const DownloadIcon = () => <Glyph icon="desktop-download" />;
 
-class Download extends Component {
+export default class SectionDownload extends React.Component {
 	constructor (props) {
 		super(props);
 		this.state = {
@@ -34,21 +35,58 @@ class Download extends Component {
 		this.handleChangeFormat = this.handleChangeFormat.bind(this);
 	}
 
+	render () {
+		const { count, format } = this.state;
+		return (
+			<Form onSubmit={ this.handleSubmit }>
+				<Row>
+					<Col sm="1/2">
+						<FormField label="Count">
+							<FormInput
+								type="number"
+								placeholder="Count"
+								onChange={ this.handleChangeCount }
+								value={ count }
+							/>
+						</FormField>
+					</Col>
+					<Col sm="1/2">
+						<FormField label="Format">
+							<FormSelect
+								options={ formatOptions }
+								onChange={ this.handleChangeFormat }
+								value={ format }
+							/>
+						</FormField>
+					</Col>
+				</Row>
+				<br />
+				<div>
+					<Button style={{ width: '100%' }} type="default-primary" submit={ true }>
+						<DownloadIcon />&nbsp;
+						Download
+					</Button>
+				</div>
+			</Form>
+		);
+	}
+
 	handleSubmit (e) {
 		e.preventDefault();
 		this.downloadFile();
 	}
 
 	handleChangeCount (e) {
-		this.setState({
-			count: e.target.value,
-		});
+		const { value } = e.currentTarget;
+		this.setState(() => ({
+			count: value,
+		}));
 	}
 
 	handleChangeFormat (value) {
-		this.setState({
+		this.setState(() => ({
 			format: value,
-		});
+		}));
 	}
 
 	generateUUIDs () {
@@ -70,7 +108,7 @@ class Download extends Component {
 	}
 
 	downloadJSON (data) {
-		const json = JSON.stringify(data, null, '  ');
+		const json = JSON.stringify(data, null, 2);
 		this.downloadData(
 			json,
 			data.length,
@@ -100,38 +138,4 @@ class Download extends Component {
 		a.click();
 		URL.revokeObjectURL(url);
 	}
-
-	render () {
-		const { count, format } = this.state;
-		return (
-			<Form onSubmit={ this.handleSubmit }>
-				<FormRow>
-					<FormField width="one-half" label="Count">
-						<FormInput
-							type="number"
-							placeholder="Count"
-							onChange={ this.handleChangeCount }
-							value={ count }
-						/>
-					</FormField>
-					<FormField width="one-half" label="Format">
-						<FormSelect
-							options={ formatOptions }
-							onChange={ this.handleChangeFormat }
-							value={ format }
-						/>
-					</FormField>
-				</FormRow>
-				<div>
-					<Button type="default-primary" submit>
-						<DownloadIcon />
-						{ ' ' }
-						Download
-					</Button>
-				</div>
-			</Form>
-		);
-	}
 }
-
-export default Download;
