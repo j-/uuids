@@ -1,6 +1,7 @@
 import React from 'react';
 import { generateUUIDs, VERSION_4 as UUID_V4 } from '../uuid';
 import BlockButton from './BlockButton';
+import { downloadJSON, downloadCSV } from '../download';
 
 import {
 	Glyph,
@@ -121,43 +122,11 @@ export default class SectionDownload extends React.Component {
 		const { format } = this.state;
 		switch (format) {
 			case TYPE_JSON:
-				return this.downloadJSON(data);
+				return downloadJSON(data);
 			case TYPE_CSV:
-				return this.downloadCSV(data);
+				return downloadCSV(data);
 			default:
 				return null;
 		}
-	}
-
-	downloadJSON (data) {
-		const json = JSON.stringify(data, null, 2);
-		this.downloadData(
-			json,
-			data.length,
-			'application/json',
-			'.json'
-		);
-	}
-
-	downloadCSV (data) {
-		const csv = 'UUID\n' + data.join('\n');
-		this.downloadData(
-			csv,
-			data.length,
-			'text/csv',
-			'.csv'
-		);
-	}
-
-	// From http://jsfiddle.net/koldev/cW7W5/
-	downloadData (raw, count, type, extension) {
-		const timestamp = Date.now();
-		const blob = new Blob([raw], { type });
-		const url = URL.createObjectURL(blob);
-		const a = document.createElement('a');
-		a.href = url;
-		a.download = `uuids-${count}-${timestamp}.${extension}`;
-		a.click();
-		URL.revokeObjectURL(url);
 	}
 }
