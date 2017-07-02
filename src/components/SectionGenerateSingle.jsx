@@ -24,6 +24,7 @@ export default class SectionGenerateSingle extends React.Component {
 		};
 		this.inputComponent = null;
 		this.regenerateUUID = this.regenerateUUID.bind(this);
+		this.selectUUID = this.selectUUID.bind(this);
 	}
 
 	componentDidMount () {
@@ -41,6 +42,7 @@ export default class SectionGenerateSingle extends React.Component {
 						readOnly={ true }
 						autoFocus={ true }
 						ref={ (ref) => this.inputComponent = ref }
+						onMouseUp={ this.selectUUID }
 					/>
 				</FormField>
 				<br />
