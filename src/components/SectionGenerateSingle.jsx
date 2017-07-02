@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import { generateUUID } from '../uuid';
+import BlockButton from './BlockButton';
 
 import {
 	Glyph,
@@ -14,7 +15,6 @@ import {
 
 const ReloadIcon = () => <Glyph icon="sync" />;
 const CopyIcon = () => <Glyph icon="clippy" />;
-const BlockButton = (props) => <Button style={{ width: '100%' }} { ...props } />;
 
 export default class SectionGenerateSingle extends React.Component {
 	constructor (props) {

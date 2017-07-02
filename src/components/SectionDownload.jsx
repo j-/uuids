@@ -1,5 +1,6 @@
 import React from 'react';
 import { generateUUIDs, VERSION_4 as UUID_V4 } from '../uuid';
+import BlockButton from './BlockButton';
 
 import {
 	Glyph,
@@ -9,7 +10,6 @@ import {
 	FormField,
 	FormInput,
 	FormSelect,
-	Button,
 } from 'elemental';
 
 const TYPE_JSON = 'json';
@@ -62,10 +62,10 @@ export default class SectionDownload extends React.Component {
 				</Row>
 				<br />
 				<div>
-					<Button style={{ width: '100%' }} type="default-primary" submit={ true }>
+					<BlockButton type="default-primary" submit={ true }>
 						<DownloadIcon />&nbsp;
 						Download
-					</Button>
+					</BlockButton>
 				</div>
 			</Form>
 		);

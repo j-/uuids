@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import { generateUUIDs } from '../uuid';
+import BlockButton from './BlockButton';
 
 import {
 	Glyph,
-	FormRow,
 	FormField,
 	FormInput,
 	FormSelect,
@@ -24,7 +24,6 @@ const clamp = (val, min, max) => (
 
 const ReloadIcon = () => <Glyph icon="sync" />;
 const CopyIcon = () => <Glyph icon="clippy" />;
-const BlockButton = (props) => <Button style={{ width: '100%' }} { ...props } />;
 
 const DEFAULT_DELIMITER = '\n';
 const delimiterOptions = [
