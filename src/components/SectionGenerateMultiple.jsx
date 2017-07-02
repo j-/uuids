@@ -49,11 +49,16 @@ export default class SectionGenerateMultiple extends React.Component {
 	render () {
 		const { count, delimiter, uuids } = this.state;
 		const text = uuids.join(delimiter);
+		const textareaStyle = {
+			whiteSpace: delimiter === '\n' ? 'pre' : 'pre-wrap',
+			fontFamily: 'monospace',
+			height: 250,
+		};
 		return (
 			<div>
 				<FormField>
 					<FormInput
-						style={{ fontFamily: 'monospace', height: 250 }}
+						style={ textareaStyle }
 						multiline={ true }
 						readOnly={ true }
 						spellCheck={ false }
