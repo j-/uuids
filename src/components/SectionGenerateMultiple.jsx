@@ -77,8 +77,9 @@ export default class SectionGenerateMultiple extends React.Component {
 				</FormField>
 				<Row>
 					<Col sm="1/2">
-						<FormField label="Count">
+						<FormField label="Count" htmlFor="multiple-count">
 							<FormInput
+								id="multiple-count"
 								type="number"
 								placeholder="Count"
 								onChange={ this.handleChangeCount }
@@ -87,8 +88,9 @@ export default class SectionGenerateMultiple extends React.Component {
 						</FormField>
 					</Col>
 					<Col sm="1/2">
-						<FormField label="Delimiter">
+						<FormField label="Delimiter" htmlFor="multiple-delimiter">
 							<FormSelect
+								id="multiple-delimiter"
 								options={ delimiterOptions }
 								onChange={ this.handleChangeDelimiter }
 								value={ delimiter }

@@ -49,8 +49,9 @@ export default class SectionDownload extends React.Component {
 			>
 				<Row>
 					<Col sm="1/2">
-						<FormField label="Count">
+						<FormField label="Count" htmlFor="download-count">
 							<FormInput
+								id="download-count"
 								type="number"
 								placeholder="Count"
 								onChange={ this.handleChangeCount }
@@ -59,8 +60,9 @@ export default class SectionDownload extends React.Component {
 						</FormField>
 					</Col>
 					<Col sm="1/2">
-						<FormField label="Format">
+						<FormField label="Format" htmlFor="download-format">
 							<FormSelect
+								id="download-format"
 								options={ formatOptions }
 								onChange={ this.handleChangeFormat }
 								value={ format }
